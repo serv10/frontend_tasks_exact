@@ -20,16 +20,22 @@ export default function TaskList({ tasks, loadTasks }) {
 
    return (
       <div className='cards-task'>
-         {tasks.map((task, index) => {
-            return (
-               <Task
-                  task={task}
-                  key={index}
-                  handleDelete={handleDelete}
-                  handleToggleComplete={handleToggleComplete}
-               />
-            );
-         })}
+         {tasks.length > 0 ? (
+            tasks.map((task, index) => {
+               return (
+                  <Task
+                     task={task}
+                     key={index}
+                     handleDelete={handleDelete}
+                     handleToggleComplete={handleToggleComplete}
+                  />
+               );
+            })
+         ) : (
+            <div className='no-tasks__container'>
+               <p className='no-tasks__title'>No tasks, please insert one</p>
+            </div>
+         )}
       </div>
    );
 }
