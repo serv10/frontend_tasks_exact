@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import { getTasks } from './Api';
 import './App.css';
+import TaskForm from './components/TaskForm';
+import TaskList from './components/TaskList';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   const [tasks, setTasks] = useState([]);
+
+   useEffect(() => {
+      loadTasks();
+   }, []);
+
+   const loadTasks = async () => {
+      const data = await getTasks();
+      setTasks(data);
+   };
+
+   return (
+      <div className='diagonal-split-background'>
+         <div className='container-tasks'>
+            <TaskForm loadTasks={loadTasks} />
+            <TaskList tasks={tasks} loadTasks={loadTasks} />
+         </div>
+      </div>
+   );
 }
 
 export default App;
