@@ -1,8 +1,9 @@
+/* eslint-disable eqeqeq */
 export default function Task({ task, handleDelete, handleToggleComplete }) {
    return (
       <div
          className={
-            'card-task ' + (task.completed === 1 ? 'card-task__complete' : null)
+            'card-task ' + (task.completed ? 'card-task__complete' : null)
          }
       >
          <p className='card-task__title'>{task.title}</p>
@@ -11,12 +12,8 @@ export default function Task({ task, handleDelete, handleToggleComplete }) {
                onClick={() => {
                   handleToggleComplete(task.id);
                }}
-               className={
-                  task.completed === 1 ? 'bi-toggle-on' : 'bi-toggle-off'
-               }
-               style={
-                  task.completed === 1 ? { color: 'green' } : { color: 'gray' }
-               }
+               className={task.completed ? 'bi-toggle-on' : 'bi-toggle-off'}
+               style={task.completed ? { color: 'green' } : { color: 'gray' }}
             />
 
             <i
