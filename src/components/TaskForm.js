@@ -6,9 +6,11 @@ export default function TaskForm({ loadTasks }) {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      await saveTask(task);
-      cleanInput();
-      loadTasks();
+      if (task.trim().length > 0) {
+         await saveTask(task);
+         cleanInput();
+         loadTasks();
+      }
    };
 
    const cleanInput = () => {
